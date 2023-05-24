@@ -1,0 +1,68 @@
+.homeContainer {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  background-color: var(--red);
+}
+
+.searchButton {
+  background-color: var(--white);
+  color: var(--red);
+  border: none;
+  height: 52px;
+  width: 100px;
+  border-radius: 0 5px 5px 0;
+  font-family: "Orbitron", sans-serif;
+  font-size: 20px;
+}
+.searchButton:hover {
+  cursor: pointer;
+  color: var(--white);
+  background-color: var(--red);
+}
+
+.searchField {
+  height: 50px;
+  width: 500px;
+  border-radius: 5px 0 0 5px;
+  border: none;
+  font-family: "Orbitron", sans-serif;
+  font-size: 20px;
+}
+.landingLogo {
+  padding: 50px;
+  max-width: 450px;
+}
+
+.searchOptions {
+  display: flex;
+  flex-direction: row;
+  width: 500px;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+
+.optionsButton {
+  background: none;
+  color: var(--white);
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 900px;
+}
+.searchDescriptor {
+  font-size: 25px;
+  font-weight: 900px !important;
+  padding: 0;
+  margin: 0;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-top: -40px;
+  margin-bottom: 40px;
+}

@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import Header from "../src/components/Header.js";
+import Home from "../src/components/Home.js";
+import SearchWeb from "../src/components/SearchWeb.js";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout children={<SearchWeb />} />} />
+        <Route index element={<Home />} />
+        <Route path="/web" element={<SearchWeb />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
+const Layout = ({ children }) => {
+  const { pathname } = useLocation();
+
+  return (
+    <div>
+      {pathname !== "/" ? <Header /> : null}
+      <div>{children}</div>
     </div>
   );
-}
+};
 
 export default App;
