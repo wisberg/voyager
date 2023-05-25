@@ -1,0 +1,145 @@
+.resultContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding-left: 10%;
+  padding-right: 50%;
+}
+
+.metaContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  vertical-align: center;
+}
+
+.titleURLContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+}
+.resultFavicon {
+  height: 15px;
+  width: 15px;
+}
+
+.imgContainer {
+  background-color: white;
+  height: 25px;
+  width: 25px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  margin: 10px;
+}
+
+.searchTitle {
+  font-size: 18px;
+  margin-left: 2%;
+  color: var(--red);
+  text-decoration: none;
+}
+.searchTitle:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.resultDescription {
+  font-size: 16px;
+  margin-left: 2%;
+}
+
+.providerURL {
+  margin-bottom: -10px;
+  font-size: 10px;
+}
+
+.providerName {
+  text-transform: capitalize;
+  font-size: 10px;
+}
+
+.searchBackground {
+  width: 100%;
+  background-color: var(--red);
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  vertical-align: center;
+  align-items: center;
+}
+
+.searchButtonSmall {
+  background-color: var(--white);
+  color: var(--red);
+  border: none;
+  height: 22px;
+  width: 70px;
+  border-radius: 0 5px 5px 0;
+  font-family: "Orbitron", sans-serif;
+  font-size: 10px;
+}
+.searchButtonSmall:hover {
+  cursor: pointer;
+  color: var(--white);
+  background-color: var(--red);
+}
+
+.searchFieldSmall {
+  height: 20px;
+  width: 300px;
+  border-radius: 5px 0 0 5px;
+  border: none;
+  font-family: "Orbitron", sans-serif;
+  font-size: 10px;
+}
+
+.searchFieldSmall:focus {
+  border: none;
+  text-decoration: none;
+  outline: none;
+  box-shadow: rgba(255, 255, 255, 0.35) 0px 5px 15px;
+}
+
+.resultsCount {
+  margin-left: 10%;
+  font-family: "Orbitron", sans-serif;
+}
+
+.breadCrumb {
+  background-color: var(--white);
+  color: var(--red);
+  border: none;
+  height: 22px;
+  width: 70px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 14px;
+}
+.breadCrumb:hover {
+  cursor: pointer;
+  color: var(--white);
+  background-color: var(--red);
+}
+.pageBreadcrumbs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  padding: 5%;
+}
+
+.activeButton {
+  background-color: var(--red);
+  color: var(--white);
+  border: none;
+  height: 22px;
+  width: 70px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 14px;
+}

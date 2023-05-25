@@ -1,9 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "../style/searchweb.css";
 
 const SearchWeb = () => {
-  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+  const [searchQuery, setQuery] = useState("");
+  const { query } = useParams();
+
+  useEffect(() => {
+    setQuery(query);
+  }, [query]);
+
   const [pageNumber, setPageNumber] = useState(1);
   const [responseData, setResponseData] = useState({
     _type: "all",
@@ -391,39 +399,41 @@ const SearchWeb = () => {
     ],
   });
 
-  //   useEffect(() => {
-  //     if (query !== "") {
-  //       const fetchData = async () => {
-  //         const options = {
-  //           method: "GET",
-  //           url: "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/WebSearchAPI",
-  //           params: {
-  //             q: query,
-  //             pageNumber: pageNumber.toString(),
-  //             pageSize: "10",
-  //             autoCorrect: "true",
-  //           },
-  //           headers: {
-  //             "X-RapidAPI-Key": process.env.REACT_APP_SEARCH_API_KEY,
-  //             "X-RapidAPI-Host":
-  //               "contextualwebsearch-websearch-v1.p.rapidapi.com",
-  //           },
-  //         };
-
-  //         try {
-  //           const response = await axios.request(options);
-  //           console.log(response.data);
-  //         } catch (error) {
-  //           console.error(error);
-  //         }
+  // useEffect(() => {
+  //   if (query !== "") {
+  //     const fetchData = async () => {
+  //       const options = {
+  //         method: "GET",
+  //         url: "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/WebSearchAPI",
+  //         params: {
+  //           q: query,
+  //           pageNumber: pageNumber.toString(),
+  //           pageSize: "10",
+  //           autoCorrect: "true",
+  //         },
+  //         headers: {
+  //           "X-RapidAPI-Key": process.env.REACT_APP_SEARCH_API_KEY,
+  //           "X-RapidAPI-Host":
+  //             "contextualwebsearch-websearch-v1.p.rapidapi.com",
+  //         },
   //       };
-  //       fetchData();
-  //     }
-  //   }, [query, pageNumber]);
+
+  //       try {
+  //         const response = await axios.request(options);
+  //         console.log(response.data);
+  //         setResponseData(response.data);
+
+  //       } catch (error) {
+  //         console.error(error);
+  //       }
+  //     };
+  //     fetchData();
+  //   }
+  // }, [query, pageNumber]);
 
   function handleSubmit(e) {
     e.preventDefault();
-    setQuery(e.target.elements.search.value);
+    navigate(`/search-web/${e.target.elements.search.value}`);
   }
   function getFaviconURL(url) {
     return `http://www.google.com/s2/favicons?domain=${url}`;
@@ -438,29 +448,78 @@ const SearchWeb = () => {
         </form>
       ) : (
         <div className="results">
-          <form className="searchWebForm" onSubmit={handleSubmit}>
-            <input type="text" name="search" />
-            <button type="submit">Search</button>
-          </form>
+          <div className="searchBackground">
+            <form className="searchWebForm" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                name="search"
+                autoComplete="off"
+                className="searchFieldSmall"
+              />
+              <button type="submit" className="searchButtonSmall">
+                Search
+              </button>
+            </form>
+          </div>
+          <p className="resultsCount">{responseData.totalCount} results.</p>
+          {responseData.didUMean !== "" ? (
+            <div className="didYouMean">
+              <Link to={`/search-web/${responseData.didUMean}`}>
+                Did you mean {responseData.didUMean}?
+              </Link>
+            </div>
+          ) : (
+            <></>
+          )}
           {responseData.value.map((item) => (
             <div className="resultContainer" key={item.id}>
               <div className="metaContainer">
-                <img
-                  src={getFaviconURL(item.image.webpageUrl)}
-                  alt={item.image.name}
-                  className="resultFavicon"
-                />
-                <p className="providerName">{item.provider.name}</p>
-                <p className="providerURL">{item.url}</p>
-                <a className="searchTitle" href={item.url}>
-                  {item.title}
-                </a>
+                <div className="imgContainer">
+                  <img
+                    src={getFaviconURL(item.image.webpageUrl)}
+                    alt={item.image.name}
+                    className="resultFavicon"
+                  />
+                </div>
+                <div className="titleURLContainer">
+                  <p className="providerURL">{item.url}</p>
+                  <p className="providerName">{item.provider.name}</p>
+                </div>
               </div>
+              <a className="searchTitle" href={item.url}>
+                {item.title}
+              </a>
+
               <p className="resultDescription">{item.description}</p>
             </div>
           ))}
         </div>
       )}
+      <div className="pageBreadcrumbs">
+        {pageNumber < 10
+          ? Array.from({ length: 10 }, (_, i) => i + 1).map((i) => (
+              <button
+                key={i}
+                onClick={() => setPageNumber(i)}
+                className={i === pageNumber ? "activeButton" : "breadCrumb"}
+              >
+                {i}
+              </button>
+            ))
+          : Array.from({ length: 11 }).map((_, i) => {
+              const num = pageNumber - 5 + i;
+              return (
+                <button
+                  key={num}
+                  onClick={() => setPageNumber(num)}
+                  disabled={num < 0} // Optional: Disable buttons for negative numbers
+                  className={num === pageNumber ? "activeButton" : "breadCrumb"}
+                >
+                  {num}
+                </button>
+              );
+            })}
+      </div>
     </div>
   );
 };

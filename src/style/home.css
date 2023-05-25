@@ -33,12 +33,21 @@
   font-family: "Orbitron", sans-serif;
   font-size: 20px;
 }
+
+.searchField:focus {
+  border: none;
+  text-decoration: none;
+  outline: none;
+  box-shadow: rgba(255, 255, 255, 0.35) 0px 5px 15px;
+}
+
 .landingLogo {
   padding: 50px;
   max-width: 450px;
 }
 
 .searchOptions {
+  font-family: "Orbitron", sans-serif;
   display: flex;
   flex-direction: row;
   width: 500px;
@@ -47,6 +56,7 @@
 }
 
 .optionsButton {
+  font-family: "Orbitron", sans-serif;
   background: none;
   color: var(--white);
   border: none;
@@ -57,6 +67,7 @@
   font-weight: 900px;
 }
 .searchDescriptor {
+  font-family: "Orbitron", sans-serif;
   font-size: 25px;
   font-weight: 900px !important;
   padding: 0;

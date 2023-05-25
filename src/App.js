@@ -8,9 +8,17 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout children={<SearchWeb />} />} />
-        <Route index element={<Home />} />
-        <Route path="/search-web/:query" element={<SearchWeb />} />
+        <Route
+          path="/*"
+          element={
+            <Layout>
+              <Routes>
+                <Route index element={<Home />} />
+                <Route path="search-web/:query" element={<SearchWeb />} />
+              </Routes>
+            </Layout>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
@@ -21,7 +29,7 @@ const Layout = ({ children }) => {
 
   return (
     <div>
-      {pathname !== "/" ? <Header /> : null}
+      {pathname === "/" ? null : <Header />}
       <div>{children}</div>
     </div>
   );

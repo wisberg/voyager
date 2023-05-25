@@ -40,7 +40,12 @@ const Home = () => {
       <img src={Voyager_Logo_White} className="landingLogo" />
       <p className="searchDescriptor">{searchOption}</p>
       <form className="searchWebForm" onSubmit={handleSubmit}>
-        <input type="text" name="search" className="searchField" />
+        <input
+          type="text"
+          name="search"
+          autoComplete="off"
+          className="searchField"
+        />
         <button className="searchButton" type="submit">
           Search
         </button>
