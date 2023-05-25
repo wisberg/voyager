@@ -5,12 +5,30 @@ import SearchWeb from "./SearchWeb";
 import Voyager_Logo_White from "../assets/Voyager_Logo_White.png";
 
 const Home = () => {
+  const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [searchOption, setSearchOption] = useState("web");
 
+  useEffect(() => {
+    if (query === "") {
+      return;
+    }
+    if (searchOption === "web") {
+      navigate(`/search-web/${query}`);
+    }
+    if (searchOption === "image") {
+      //navigate to searchImage component with Query
+    }
+    if (searchOption === "news") {
+      //navigate to searchNews component with Query
+    }
+  }, [query]);
+
   function handleSubmit(e) {
     e.preventDefault();
-    setQuery(e.target.elements.search.value);
+    let tempString = e.target.elements.search.value;
+    // tempString = tempString.replace(/\s/g, "");
+    setQuery(tempString);
   }
 
   const handleOnClick = (event) => {

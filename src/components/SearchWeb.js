@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import "../style/searchweb.css";
 
@@ -426,7 +426,6 @@ const SearchWeb = () => {
     setQuery(e.target.elements.search.value);
   }
   function getFaviconURL(url) {
-    console.log(`http://www.google.com/s2/favicons?domain=${url}`);
     return `http://www.google.com/s2/favicons?domain=${url}`;
   }
 
