@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import { Triangle } from "react-loader-spinner";
 import "../style/searchweb.css";
 
 const SearchWeb = () => {
   const navigate = useNavigate();
   const [searchQuery, setQuery] = useState("");
+  const [loading, setLoading] = useState(false);
   const { query } = useParams();
 
   useEffect(() => {
@@ -400,7 +402,8 @@ const SearchWeb = () => {
   });
 
   // useEffect(() => {
-  //   if (query !== "") {
+  //   setLoading(true);
+  //   if (query.trim() !== "") {
   //     const fetchData = async () => {
   //       const options = {
   //         method: "GET",
@@ -422,7 +425,7 @@ const SearchWeb = () => {
   //         const response = await axios.request(options);
   //         console.log(response.data);
   //         setResponseData(response.data);
-
+  //         setLoading(false);
   //       } catch (error) {
   //         console.error(error);
   //       }
@@ -441,85 +444,133 @@ const SearchWeb = () => {
 
   return (
     <div className="searchWebContainer">
-      {Object.keys(responseData).length === 0 ? (
+      <div className="searchBackground">
+        <p className="searchIdentifier">Web Search</p>
         <form className="searchWebForm" onSubmit={handleSubmit}>
-          <input type="text" name="search" />
-          <button type="submit">Search</button>
+          <input
+            type="text"
+            name="search"
+            autoComplete="off"
+            className="searchFieldSmall"
+          />
+          <button type="submit" className="searchButtonSmall">
+            Search
+          </button>
         </form>
+      </div>
+      {loading === true ? (
+        <div className="loaderContainer">
+          <Triangle
+            height="300px"
+            width="300px"
+            color="#a81010"
+            ariaLabel="triangle-loading"
+            wrapperStyle={{}}
+            wrapperClassName=""
+            visible={true}
+          />
+        </div>
       ) : (
         <div className="results">
-          <div className="searchBackground">
-            <form className="searchWebForm" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                name="search"
-                autoComplete="off"
-                className="searchFieldSmall"
-              />
-              <button type="submit" className="searchButtonSmall">
-                Search
-              </button>
-            </form>
-          </div>
-          <p className="resultsCount">{responseData.totalCount} results.</p>
           {responseData.didUMean !== "" ? (
-            <div className="didYouMean">
-              <Link to={`/search-web/${responseData.didUMean}`}>
-                Did you mean {responseData.didUMean}?
+            <div className="didYouMeanContainer">
+              <Link
+                className="didYouMean"
+                to={`/search-web/${responseData.didUMean}`}
+              >
+                Did you mean "{responseData.didUMean}"?
               </Link>
             </div>
           ) : (
             <></>
           )}
-          {responseData.value.map((item) => (
-            <div className="resultContainer" key={item.id}>
-              <div className="metaContainer">
-                <div className="imgContainer">
-                  <img
-                    src={getFaviconURL(item.image.webpageUrl)}
-                    alt={item.image.name}
-                    className="resultFavicon"
-                  />
-                </div>
-                <div className="titleURLContainer">
-                  <p className="providerURL">{item.url}</p>
-                  <p className="providerName">{item.provider.name}</p>
-                </div>
-              </div>
-              <a className="searchTitle" href={item.url}>
-                {item.title}
-              </a>
+          <div className="newsPage">
+            <div className="news">
+              <p className="resultsCount">
+                {responseData.totalCount} results for "{searchQuery}".
+              </p>
+              {responseData.value.map((item) => (
+                <div className="resultContainer" key={item.id}>
+                  <div className="metaContainer">
+                    <div className="imgContainer">
+                      <img
+                        src={getFaviconURL(item.image.webpageUrl)}
+                        alt={item.image.name}
+                        className="resultFavicon"
+                      />
+                    </div>
+                    <div className="titleURLContainer">
+                      <p className="providerURL">{item.url}</p>
+                      <p className="providerName">{item.provider.name}</p>
+                    </div>
+                  </div>
+                  <a className="searchTitle" href={item.url}>
+                    {item.title}
+                  </a>
 
-              <p className="resultDescription">{item.description}</p>
+                  <p className="resultDescription">{item.description}</p>
+                </div>
+              ))}
             </div>
-          ))}
+            <div className="imagePreview">
+              <p className="resultsCount2">
+                See image results for "{searchQuery}".
+              </p>
+              <div className="imagesPrev">
+                {(() => {
+                  let count = 0; // Initialize count variable
+                  return responseData.value.map((item) => {
+                    if (item.image.url !== "" && count < 5) {
+                      count++; // Increment count for valid URLs
+                      return (
+                        <img
+                          key={item.url}
+                          className="imagePrev"
+                          src={item.image.url}
+                        />
+                      );
+                    }
+                    return null; // Render null for items that don't meet the condition
+                  });
+                })()}
+              </div>
+            </div>
+          </div>
+          <div className="pageBreadcrumbs">
+            {pageNumber < 10
+              ? Array.from({ length: 10 }, (_, i) => i + 1).map((i) => (
+                  <button
+                    key={i}
+                    onClick={() => {
+                      setPageNumber(i);
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                    className={i === pageNumber ? "activeButton" : "breadCrumb"}
+                  >
+                    {i}
+                  </button>
+                ))
+              : Array.from({ length: 11 }).map((_, i) => {
+                  const num = pageNumber - 5 + i;
+                  return (
+                    <button
+                      key={num}
+                      onClick={() => {
+                        setPageNumber(num);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
+                      disabled={num < 0} // Optional: Disable buttons for negative numbers
+                      className={
+                        num === pageNumber ? "activeButton" : "breadCrumb"
+                      }
+                    >
+                      {num}
+                    </button>
+                  );
+                })}
+          </div>
         </div>
       )}
-      <div className="pageBreadcrumbs">
-        {pageNumber < 10
-          ? Array.from({ length: 10 }, (_, i) => i + 1).map((i) => (
-              <button
-                key={i}
-                onClick={() => setPageNumber(i)}
-                className={i === pageNumber ? "activeButton" : "breadCrumb"}
-              >
-                {i}
-              </button>
-            ))
-          : Array.from({ length: 11 }).map((_, i) => {
-              const num = pageNumber - 5 + i;
-              return (
-                <button
-                  key={num}
-                  onClick={() => setPageNumber(num)}
-                  disabled={num < 0} // Optional: Disable buttons for negative numbers
-                  className={num === pageNumber ? "activeButton" : "breadCrumb"}
-                >
-                  {num}
-                </button>
-              );
-            })}
-      </div>
     </div>
   );
 };

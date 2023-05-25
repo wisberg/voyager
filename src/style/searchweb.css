@@ -3,7 +3,33 @@
   flex-direction: column;
   justify-content: start;
   padding-left: 10%;
-  padding-right: 50%;
+  padding-right: 25%;
+}
+
+.loaderContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 50vh;
+  width: 100%;
+  justify-items: center;
+  align-items: center;
+}
+
+.didYouMeanContainer {
+  padding-top: 20px;
+}
+
+.didYouMean {
+  text-decoration: none;
+  padding-left: 10%;
+  font-size: 20px;
+  margin-top: 20px;
+  color: var(--red);
+  font-family: "Orbitron", sans-serif;
+}
+.didYouMean:hover {
+  text-decoration: underline;
 }
 
 .metaContainer {
@@ -20,6 +46,7 @@
   gap: 0;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 .resultFavicon {
   height: 15px;
@@ -57,11 +84,13 @@
 .providerURL {
   margin-bottom: -10px;
   font-size: 10px;
+  text-decoration: none;
 }
 
 .providerName {
   text-transform: capitalize;
   font-size: 10px;
+  text-decoration: none;
 }
 
 .searchBackground {
@@ -69,9 +98,11 @@
   background-color: var(--red);
   height: 100px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   vertical-align: center;
   align-items: center;
+  padding-bottom: 3%;
 }
 
 .searchButtonSmall {
@@ -111,6 +142,10 @@
   font-family: "Orbitron", sans-serif;
 }
 
+.resultsCount2 {
+  font-family: "Orbitron", sans-serif;
+}
+
 .breadCrumb {
   background-color: var(--white);
   color: var(--red);
@@ -142,4 +177,28 @@
   width: 70px;
   font-family: "Orbitron", sans-serif;
   font-size: 14px;
+}
+
+.searchIdentifier {
+  font-family: "Orbitron", sans-serif;
+  font-size: 16px;
+  color: var(--white);
+}
+.newsPage {
+  display: flex;
+  flex-direction: row;
+}
+
+.imagePreview {
+  width: 50%;
+}
+.imagesPrev {
+  display: flex;
+  flex-direction: row;
+}
+.imagePrev {
+  max-width: 100px;
+  height: auto;
+  border-radius: 20px;
+  padding: 10px;
 }
