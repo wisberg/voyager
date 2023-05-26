@@ -513,9 +513,9 @@ const SearchWeb = () => {
               ))}
             </div>
             <div className="imagePreview">
-              <p className="resultsCount2">
+              <Link className="resultsCount2" to={`/search-images/${query}`}>
                 See image results for "{searchQuery}".
-              </p>
+              </Link>
               <div className="imagesPrev">
                 {(() => {
                   let count = 0; // Initialize count variable

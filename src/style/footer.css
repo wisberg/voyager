@@ -1,0 +1,63 @@
+.footerContainer {
+  height: 400px;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--red);
+}
+
+.footerImg {
+  max-width: 300px;
+}
+
+.footerLinks {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+}
+
+.footerLogo {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+}
+
+.socialIcon {
+  height: 30px;
+  width: 30px;
+  color: var(--white);
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.footerButton {
+  outline: none;
+  text-decoration: none;
+  font-family: "Orbitron", sans-serif;
+  font-size: 20px;
+  color: var(--white);
+  background: none;
+  cursor: pointer;
+  border: none;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.credits {
+  background-color: var(--red);
+  color: var(--white);
+  font-family: "Orbitron", sans-serif;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+#duffLink {
+  color: var(--white);
+}

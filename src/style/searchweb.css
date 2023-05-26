@@ -144,6 +144,11 @@
 
 .resultsCount2 {
   font-family: "Orbitron", sans-serif;
+  text-decoration: none;
+  color: inherit;
+}
+.resultsCount2:hover {
+  text-decoration: underline;
 }
 
 .breadCrumb {
@@ -191,6 +196,7 @@
 
 .imagePreview {
   width: 50%;
+  padding-top: 15px;
 }
 .imagesPrev {
   display: flex;

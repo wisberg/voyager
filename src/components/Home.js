@@ -18,13 +18,13 @@ const Home = () => {
       //navigate to searchWeb component with Query
       navigate(`/search-web/${query}`);
     }
-    if (searchOption === "image") {
+    if (searchOption === "images") {
       //navigate to searchImage component with Query
       navigate(`/search-images/${query}`);
-      console.log("is this trying to navigate to images?");
     }
     if (searchOption === "news") {
       //navigate to searchNews component with Query
+      navigate(`/search-news/${query}`);
     }
   }, [query]);
 
@@ -60,7 +60,7 @@ const Home = () => {
         <div className="searchOptions">
           <button
             className="optionsButton"
-            value="image"
+            value="images"
             onClick={handleOnClick}
           >
             Images
