@@ -208,3 +208,22 @@
   border-radius: 20px;
   padding: 10px;
 }
+
+@media (max-width: 1024px) {
+  .imagePreview {
+    display: none;
+  }
+}
+.otherLinks {
+  width: 100%;
+  background-color: var(--red);
+  margin-top: -20px;
+  padding-bottom: 10px;
+}
+.otherLink {
+  font-family: "Orbitron", sans-serif;
+  font-size: 20px;
+  text-decoration: none;
+  color: var(--white);
+  margin-left: 5%;
+}

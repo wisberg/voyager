@@ -65,7 +65,7 @@ const Footer = () => {
         <a
           id="duffLink"
           href="https://duffisberg.com"
-          rel="nofollower"
+          rel="noreferrer"
           target="_blank"
         >
           Duff Isberg

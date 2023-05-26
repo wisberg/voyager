@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../style/home.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Voyager_Logo_White from "../assets/Voyager_Logo_White.png";
 
 const Home = () => {
@@ -9,22 +9,23 @@ const Home = () => {
   const [searchOption, setSearchOption] = useState("web");
 
   useEffect(() => {
-    console.log(searchOption, "from useEffect");
-    console.log(query);
-    if (query === "") {
+    if (query.trim() === "") {
       return;
     }
     if (searchOption === "web") {
       //navigate to searchWeb component with Query
       navigate(`/search-web/${query}`);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
     if (searchOption === "images") {
       //navigate to searchImage component with Query
       navigate(`/search-images/${query}`);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
     if (searchOption === "news") {
       //navigate to searchNews component with Query
       navigate(`/search-news/${query}`);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [query]);
 
@@ -37,8 +38,6 @@ const Home = () => {
 
   const handleOnClick = (e) => {
     setSearchOption(e.target.value);
-    console.log("Hi from onClick");
-    console.log(searchOption, "from onClick");
   };
 
   return (
